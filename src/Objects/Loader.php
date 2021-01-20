@@ -1,5 +1,5 @@
 <?php
-namespace CarloNicora\Minimalism\Service\Pools\Objects;
+namespace CarloNicora\Minimalism\Services\Pools\Objects;
 
 use CarloNicora\Minimalism\Interfaces\CacheInterface;
 use CarloNicora\Minimalism\Interfaces\LoaderInterface;

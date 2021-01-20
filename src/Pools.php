@@ -1,14 +1,14 @@
 <?php
-namespace CarloNicora\Minimalism\Service\Pools;
+namespace CarloNicora\Minimalism\Services\Pools;
 
 use CarloNicora\Minimalism\Interfaces\CacheInterface;
 use CarloNicora\Minimalism\Interfaces\DataInterface;
 use CarloNicora\Minimalism\Interfaces\DefaultServiceInterface;
 use CarloNicora\Minimalism\Interfaces\ServiceInterface;
-use CarloNicora\Minimalism\Service\Pools\Abstracts\AbstractDataLoader;
-use CarloNicora\Minimalism\Service\Pools\Abstracts\AbstractResourceLoader;
+use CarloNicora\Minimalism\Services\Pools\Abstracts\AbstractDataLoader;
+use CarloNicora\Minimalism\Services\Pools\Abstracts\AbstractResourceLoader;
 use CarloNicora\Minimalism\Interfaces\LoaderInterface;
-use CarloNicora\Minimalism\Service\Pools\Objects\Loader;
+use CarloNicora\Minimalism\Services\Pools\Objects\Loader;
 use CarloNicora\Minimalism\Services\JsonApi\JsonApi;
 use Exception;
 use RuntimeException;

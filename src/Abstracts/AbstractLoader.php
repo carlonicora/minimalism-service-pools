@@ -1,5 +1,5 @@
 <?php
-namespace CarloNicora\Minimalism\Service\Pools\Abstracts;
+namespace CarloNicora\Minimalism\Services\Pools\Abstracts;
 
 use CarloNicora\Minimalism\Interfaces\LoaderInterface;
 
