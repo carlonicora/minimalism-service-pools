@@ -1,11 +1,12 @@
 <?php
 namespace CarloNicora\Minimalism\Services\Pools\Abstracts;
 
+use CarloNicora\Minimalism\Interfaces\ResourceLoaderInterface;
 use CarloNicora\Minimalism\Interfaces\ServiceInterface;
 use CarloNicora\Minimalism\Interfaces\LoaderInterface;
 use CarloNicora\Minimalism\Services\JsonApi\JsonApi;
 
-abstract class AbstractResourceLoader extends AbstractLoader
+abstract class AbstractResourceLoader extends AbstractLoader implements ResourceLoaderInterface
 {
     /**
      * UsersLoader constructor.

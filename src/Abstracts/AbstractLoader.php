@@ -10,7 +10,7 @@ abstract class AbstractLoader
      * @param LoaderInterface $loader
      */
     public function __construct(
-        private LoaderInterface $loader,
+        protected LoaderInterface $loader,
     )
     {
     }

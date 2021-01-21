@@ -3,7 +3,9 @@ namespace CarloNicora\Minimalism\Services\Pools;
 
 use CarloNicora\Minimalism\Interfaces\CacheInterface;
 use CarloNicora\Minimalism\Interfaces\DataInterface;
+use CarloNicora\Minimalism\Interfaces\DataLoaderInterface;
 use CarloNicora\Minimalism\Interfaces\DefaultServiceInterface;
+use CarloNicora\Minimalism\Interfaces\ResourceLoaderInterface;
 use CarloNicora\Minimalism\Interfaces\ServiceInterface;
 use CarloNicora\Minimalism\Services\Pools\Abstracts\AbstractDataLoader;
 use CarloNicora\Minimalism\Services\Pools\Abstracts\AbstractResourceLoader;
@@ -29,6 +31,8 @@ class Pools implements ServiceInterface
         ?CacheInterface $cache=null,
     )
     {
+        $this->loaders = [];
+
         $loader = $defaultService->getLoaderInterface();
         if ($loader !== null) {
             $this->loader = $loader;
@@ -38,14 +42,16 @@ class Pools implements ServiceInterface
                 defaultService:$defaultService,
             );
         }
+        
+        $this->jsonApi->setLoaderInterface($this->loader);
     }
 
     /**
      * @param string $className
-     * @return LoaderInterface
+     * @return DataLoaderInterface|ResourceLoaderInterface
      * @throws Exception
      */
-    public function get(string $className): LoaderInterface
+    public function get(string $className): DataLoaderInterface|ResourceLoaderInterface
     {
         if (!array_key_exists($className, $this->loaders)) {
             $classType = new ReflectionClass($className);
