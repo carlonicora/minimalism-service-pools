@@ -4,7 +4,6 @@ namespace CarloNicora\Minimalism\Services\Pools;
 use CarloNicora\Minimalism\Interfaces\CacheInterface;
 use CarloNicora\Minimalism\Interfaces\DataInterface;
 use CarloNicora\Minimalism\Interfaces\DataLoaderInterface;
-use CarloNicora\Minimalism\Interfaces\DefaultServiceInterface;
 use CarloNicora\Minimalism\Interfaces\ResourceLoaderInterface;
 use CarloNicora\Minimalism\Interfaces\ServiceInterface;
 use CarloNicora\Minimalism\Services\Pools\Abstracts\AbstractDataLoader;
@@ -24,26 +23,40 @@ class Pools implements ServiceInterface
     /** @var array|null  */
     protected ?array $loaders=null;
 
+    /**
+     * Pools constructor.
+     * @param DataInterface $data
+     * @param JsonApi $jsonApi
+     * @param CacheInterface|null $cache
+     */
     public function __construct(
         protected DataInterface $data,
         protected JsonApi $jsonApi,
-        DefaultServiceInterface|ServiceInterface $defaultService,
         ?CacheInterface $cache=null,
     )
     {
         $this->loaders = [];
 
-        $loader = $defaultService->getLoaderInterface();
-        if ($loader !== null) {
-            $this->loader = $loader;
-        } else {
-            $this->loader = new Loader(
-                cache: $cache,
-                defaultService:$defaultService,
-            );
-        }
-        
+        $this->loader = new Loader(
+            cache: $cache,
+            defaultService:null,
+        );
+
         $this->jsonApi->setLoaderInterface($this->loader);
+    }
+
+    /**
+     * @param LoaderInterface $loader
+     */
+    public function setSpecialisedLoader(LoaderInterface $loader): void
+    {
+        $this->loader = $loader;
+        $this->jsonApi->setLoaderInterface($this->loader);
+
+        /** @var AbstractDataLoader|AbstractResourceLoader $singleLoader */
+        foreach ($this->loaders ?? [] as $singleLoader){
+            $singleLoader->setLoader($this->loader);
+        }
     }
 
     /**

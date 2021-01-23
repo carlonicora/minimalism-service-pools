@@ -22,4 +22,12 @@ abstract class AbstractLoader
     {
         return $this->loader;
     }
+
+    /**
+     * @param LoaderInterface $loader
+     */
+    public function setLoader(LoaderInterface $loader): void
+    {
+        $this->loader = $loader;
+    }
 }
