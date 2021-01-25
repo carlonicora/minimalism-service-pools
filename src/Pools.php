@@ -100,6 +100,6 @@ class Pools implements ServiceInterface
      */
     public function destroy(): void
     {
-        $this->loaders = null;
+        $this->loaders = [];
     }
 }
