@@ -1,6 +1,7 @@
 <?php
 namespace CarloNicora\Minimalism\Services\Pools\Abstracts;
 
+use CarloNicora\Minimalism\Exceptions\RecordNotFoundException;
 use CarloNicora\Minimalism\Interfaces\DataInterface;
 use CarloNicora\Minimalism\Interfaces\DataLoaderInterface;
 use CarloNicora\Minimalism\Interfaces\LoaderInterface;
@@ -18,5 +19,27 @@ abstract class AbstractDataLoader extends AbstractLoader implements DataLoaderIn
     )
     {
         parent::__construct($loader);
+    }
+
+    /**
+     * @param array $response
+     * @param string|null $recordType
+     * @return array
+     * @throws RecordNotFoundException
+     */
+    protected function returnSingleValue(
+        array $response,
+        ?string $recordType,
+    ): array
+    {
+        if ($response === []){
+            throw new RecordNotFoundException(
+                $recordType === null
+                    ? 'Record Not found'
+                    : $recordType . ' not found'
+            );
+        }
+
+        return $response[0];
     }
 }
