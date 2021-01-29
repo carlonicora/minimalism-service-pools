@@ -29,7 +29,7 @@ abstract class AbstractDataLoader extends AbstractLoader implements DataLoaderIn
      */
     protected function returnSingleValue(
         array $response,
-        ?string $recordType,
+        ?string $recordType=null,
     ): array
     {
         if ($response === []){
