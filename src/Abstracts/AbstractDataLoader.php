@@ -32,7 +32,7 @@ abstract class AbstractDataLoader extends AbstractLoader implements DataLoaderIn
         ?string $recordType=null,
     ): array
     {
-        if ($response === []){
+        if ($response === [] || $response === [[]]){
             throw new RecordNotFoundException(
                 $recordType === null
                     ? 'Record Not found'
